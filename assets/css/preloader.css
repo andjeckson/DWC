@@ -1,0 +1,112 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  height: max-content;
+  color: var(--cor, #000);
+}
+
+/* Preloaders base */
+:host .default-preloader,
+:host .ios-preloader,
+:host .miui-preloader,
+:host .windows-preloader{
+  width: var(--tamanho, 20px);
+  height: var(--tamanho, 20px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Default Preloader */
+
+:host .default-preloader svg{
+  animation: girar-miui .5s linear infinite;
+}
+
+:host .default-preloader svg circle{
+   fill: transparent;
+   animation: defaultAnimation 2s linear infinite alternate
+}
+
+@keyframes defaultAnimation{
+  0%{ stroke-dashoffset: calc( var(--tamanho) * 3) }
+  30%{stroke-dashoffset: calc( var(--tamanho) * 2)}
+  90%{ stroke-dashoffset: calc( var(--tamanho) * 1)}
+}
+
+/* iOS Preloader */
+:host .ios-preloader span.dot {
+  position: absolute;
+  width: calc(var(--tamanho) * 0.12);
+  height: 35%;
+  background: currentColor;
+  transform: rotate(calc(var(--i) * 30deg))
+             translateY(calc(var(--tamanho) * 0.4));
+  animation: loader .75s linear infinite;
+  animation-delay: calc(var(--i) * 75ms);
+  border-radius: 10px;
+}
+
+@keyframes loader {
+  from { opacity: 1; }
+  to   { opacity: 0.25; }
+}
+
+/* MIUI Preloader */
+:host .miui-preloader {
+  border-radius: 50%;
+  border: calc(var(--tamanho) * 0.1) solid currentColor;
+  animation: girar-miui .75s linear infinite both;
+  box-sizing: border-box;
+}
+
+:host .miui-preloader::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--tamanho) * 0.35);
+  height: calc(var(--tamanho) * 0.35);
+  border-radius: 50%;
+  background: currentColor;
+  top: calc(var(--tamanho) * 0.05);
+}
+
+@keyframes girar-miui {
+  to { transform: rotate(360deg); }
+}
+
+/* Windows Preloader */
+:host .windows-preloader {
+  width: var(--tamanho);
+  height: var(--tamanho);
+  position: relative;
+}
+
+:host .windows-preloader .dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset:0;
+  animation: girar 2s linear infinite;
+}
+
+:host .windows-preloader .dot::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--tamanho) / 5.71);
+  height: calc(var(--tamanho) / 5.71);
+  border-radius: 5px;
+  background: currentColor;
+  left: 0;
+}
+
+@keyframes girar {
+  30%  { transform: rotate(220deg); }
+  40%  { transform: rotate(450deg); }
+  75%  { transform: rotate(720deg); }
+  76%  { opacity: 0; }
+  100% { transform: rotate(0); opacity: 0; }
+}
