@@ -1,0 +1,9 @@
+:host{
+  display: inline-block;
+  --cor: #C4E2FF;
+  font-family: Roboto, sans-serif;
+}
+
+:host mark{
+  background: var(--cor);
+}

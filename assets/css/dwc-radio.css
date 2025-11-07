@@ -1,0 +1,100 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  height: max-content;
+  --tamanho: 16px;
+  --cor: #067AA1;
+}
+
+:host label {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+:host p {
+  margin: 0;
+  padding: 0;
+}
+
+:host input[type*="radio"] {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tamanho);
+  height: var(--tamanho);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 2px solid #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color .25s ease-in-out;
+}
+
+:host input[type*="radio"]::before,
+:host input[type*="radio"]::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  transition: .25s ease-in-out;
+  z-index: 1;
+}
+
+:host input[type*="radio"]::before {
+  border: calc(var(--tamanho) / 3.5) solid transparent;
+  opacity: .4;
+  box-sizing: border-box;
+}
+
+:host input[type*="radio"]:active::before {
+  width: 160%;
+  height: 160%;
+  border-color: var(--cor);
+}
+
+:host input[type*="radio"]:checked,
+:host input[type*="radio"]:active,
+:host input[type*="radio"]:hover {
+  border-color: var(--cor);
+}
+
+:host input[type*="radio"].dwc-radio {
+  &::after {
+    transition: .25s linear;
+  }
+  &:checked {
+    background: var(--cor);
+  }
+  &:checked::after {
+    width: 60%;
+    height: 60%;
+    background: #fff;
+  }
+}
+
+:host input[type*="radio"]:not(.dwc-radio):checked::after {
+  width: 65%;
+  height: 65%;
+  background: var(--cor);
+}
+
+:host input[type*="radio"].dwc-radio-minimalista:checked::after {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 1043px) {
+  :host input[type*="radio"]:hover::before {
+    width: 180%;
+    height: 180%;
+    border-color: var(--cor);
+  }
+}
